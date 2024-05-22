@@ -1,0 +1,61 @@
+from aiogram.filters.callback_data import CallbackData
+from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup
+from aiogram.utils.keyboard import InlineKeyboardBuilder
+
+
+class MeetingCD(CallbackData, prefix='meetings'):
+    meeting_id: int
+
+
+def get_keyboard_admin_panel():
+    buttons = [
+        [
+            InlineKeyboardButton(
+                text='Создать speaking club',
+                callback_data='create_meeting',
+            )
+        ],
+        [
+            InlineKeyboardButton(
+                text='Информация по записям',
+                callback_data='get_info_records',
+            )
+        ],
+        [
+            InlineKeyboardButton(
+                text='Редактирование',
+                callback_data='get_info_meetings',
+            )
+        ],
+        [
+            InlineKeyboardButton(
+                text='Удаление',
+                callback_data='delete_meetings',
+            )
+        ],
+    ]
+
+    keyboard = InlineKeyboardMarkup(inline_keyboard=buttons)
+    return keyboard
+
+
+def get_keyboard_get_info_meetings(meetings):
+    builder = InlineKeyboardBuilder()
+    for i in meetings:
+        builder.add(
+            InlineKeyboardButton(
+                text=f'{i.date}, {i.time}',
+                callback_data=MeetingCD(
+                    meeting_id=i.id
+                ).pack()
+            )
+        )
+
+    builder.add(
+        InlineKeyboardButton(
+            text='Вернуться к основному меню',
+            callback_data='go_back'
+        )
+    )
+    keyboard = builder.adjust(1, 1).as_markup()
+    return keyboard

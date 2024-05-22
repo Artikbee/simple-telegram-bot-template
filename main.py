@@ -2,10 +2,13 @@ import sys
 from aiogram import Bot, Dispatcher
 from aiogram.fsm.storage.memory import MemoryStorage
 import asyncio
+
+from database.session import async_session_local
 from middlewares.database import DataBaseSession
 import logging
 
 from config import load_config
+from handlers import user
 
 
 async def main() -> None:
@@ -15,6 +18,7 @@ async def main() -> None:
     bot = Bot(token=config.tg_bot.TOKEN)
 
     dp.include_routers(
+        user.router,
     )
 
     dp.update.middleware(DataBaseSession(session_pool=async_session_local))
