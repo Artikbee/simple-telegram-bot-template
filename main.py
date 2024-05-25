@@ -4,11 +4,12 @@ from aiogram.fsm.storage.memory import MemoryStorage
 import asyncio
 
 from database.session import async_session_local
+from keyboards.set_menu import set_main_menu
 from middlewares.database import DataBaseSession
 import logging
 
 from config import load_config
-from handlers import user
+from handlers.user import user_router
 
 
 async def main() -> None:
@@ -18,8 +19,9 @@ async def main() -> None:
     bot = Bot(token=config.tg_bot.TOKEN)
 
     dp.include_routers(
-        user.router,
+        user_router,
     )
+    await set_main_menu(bot)
 
     dp.update.middleware(DataBaseSession(session_pool=async_session_local))
 

@@ -7,32 +7,22 @@ class MeetingCD(CallbackData, prefix='meetings'):
     meeting_id: int
 
 
-def get_keyboard_admin_panel():
+def get_keyboard_command_start():
     buttons = [
         [
             InlineKeyboardButton(
-                text='Создать speaking club',
-                callback_data='create_meeting',
+                text='Привет',
+                url='www.google.com',
+
             )
         ],
         [
             InlineKeyboardButton(
-                text='Информация по записям',
-                callback_data='get_info_records',
+                text='Привет',
+                callback_data='ttt',
             )
         ],
-        [
-            InlineKeyboardButton(
-                text='Редактирование',
-                callback_data='get_info_meetings',
-            )
-        ],
-        [
-            InlineKeyboardButton(
-                text='Удаление',
-                callback_data='delete_meetings',
-            )
-        ],
+
     ]
 
     keyboard = InlineKeyboardMarkup(inline_keyboard=buttons)
