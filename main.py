@@ -10,6 +10,7 @@ import logging
 
 from config import load_config
 from handlers.user import user_router
+from middlewares.scheduler import SchedulerMiddleware
 
 
 async def main() -> None:
@@ -24,6 +25,7 @@ async def main() -> None:
     await set_main_menu(bot)
 
     dp.update.middleware(DataBaseSession(session_pool=async_session_local))
+    dp.update.middleware(SchedulerMiddleware(scheduler=scheduler))
 
     dp.workflow_data.update(
         {
