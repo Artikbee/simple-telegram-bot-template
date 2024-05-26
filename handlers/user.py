@@ -3,7 +3,7 @@ from aiogram.filters import CommandStart
 from aiogram.types import Message
 
 from keyboards.inline import get_keyboard_command_start
-from lexicon.lexicon_ru import LEXICON_MESSAGES_RU
+from lexicon.lexicon import LEXICON_MESSAGES_RU
 
 user_router = Router()
 
