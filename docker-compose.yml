@@ -12,3 +12,20 @@ services:
       - .env
     volumes:
       - ./:/app
+    networks:
+      - tg_bot
+
+  redis_cache:
+    image: redis:latest
+    container_name: redis_cache
+    restart: always
+    command: redis-server
+    volumes:
+      - ./cache:/data
+    networks:
+      - tg_bot
+
+
+networks:
+  tg_bot:
+    driver: bridge
