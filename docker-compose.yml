@@ -1,19 +1,6 @@
 version: '3.8'
 
 services:
-  bot:
-    container_name: bot
-    restart: always
-    build:
-      context: .
-      dockerfile: Dockerfile
-    command: python main.py
-    env_file:
-      - .env
-    volumes:
-      - ./:/app
-    networks:
-      - tg_bot
 
   redis_cache:
     image: redis:latest
@@ -36,6 +23,26 @@ services:
     restart: always
     ports:
       - '5432:5432'
+    networks:
+      - tg_bot
+
+  bot:
+    container_name: bot
+    restart: always
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: python main.py
+    env_file:
+      - .env
+    volumes:
+      - ./:/app
+    depends_on:
+      - db
+      - redis_cache
+    networks:
+      - tg_bot
+
 
 volumes:
   pgdata:
