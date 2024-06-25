@@ -3,14 +3,14 @@ from aiogram import Bot, Dispatcher
 from aiogram.fsm.storage.memory import MemoryStorage
 import asyncio
 
-from database.session import async_session_local
-from keyboards.set_menu import set_main_menu
-from middlewares.database import DataBaseSession
+from src.database import async_session_local
+from src.keyboards import set_main_menu
+from src.middlewares.database import DataBaseSession
 import logging
 
 from config import load_config
-from handlers.user import user_router
-from middlewares.scheduler import SchedulerMiddleware
+from src.handlers import user_router
+from src.middlewares import SchedulerMiddleware
 
 
 async def main() -> None:

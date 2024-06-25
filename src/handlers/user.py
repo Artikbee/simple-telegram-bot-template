@@ -2,8 +2,8 @@ from aiogram import Router
 from aiogram.filters import CommandStart
 from aiogram.types import Message
 
-from keyboards.inline import get_keyboard_command_start
-from lexicon.lexicon import LEXICON_MESSAGES_RU
+from src.keyboards import get_keyboard_command_start
+from src.lexicon import LEXICON_MESSAGES_RU
 
 user_router = Router()
 

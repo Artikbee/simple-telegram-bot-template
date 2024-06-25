@@ -1,7 +1,7 @@
 from typing import Sequence
 
 from sqlalchemy import select, update
-from database.models.models import User, Role
+from src.database.models.models import User, Role
 from sqlalchemy.ext.asyncio import AsyncSession
 
 
